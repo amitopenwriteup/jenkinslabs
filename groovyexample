@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    def version = '1.0.0'
+                    def buildNumber = 123
+                    sh "echo Building version ${version} build ${buildNumber}"
+                }
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                script {
+                    sh 'echo Running tests...'
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                script {
+                    sh 'echo Deploying...'
+                }
+            }
+        }
+    }
+}
+
