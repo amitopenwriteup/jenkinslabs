@@ -1,0 +1,39 @@
+node {
+   def projects = ['project1', 'project2', 'project3']
+   
+   for (def project in projects) {
+      stage('Checkout ' + project) {
+         git "https://github.com/myrepo/${project}.git"
+      }
+      
+      stage('Build ' + project) {
+         sh "mvn clean install -DskipTests=true"
+      }
+   }
+}
+
+
+##
+
+pipeline {
+   agent any
+   
+   stages {
+      stage('Checkout and Build') {
+         steps {
+            script {
+               def projects = ['project1', 'project2', 'project3']
+               
+               for (def project in projects) {
+                  checkout([$class: 'GitSCM', branches: [[name: '*/master']], 
+                  doGenerateSubmoduleConfigurations: false, extensions: [], 
+                  submoduleCfg: [], userRemoteConfigs: [[url: "https://github.com/myrepo/${project}.git"]]])
+                  
+                  sh "mvn clean install -DskipTests=true"
+               }
+            }
+         }
+      }
+   }
+}
+

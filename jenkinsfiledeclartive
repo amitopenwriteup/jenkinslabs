@@ -1,0 +1,17 @@
+pipeline {
+   agent {
+      label 'myagent'
+   }
+   stages {
+      stage('Checkout') {
+         steps {
+            git 'https://github.com/amitvermaa93/jenkins-git-integration.git'
+         }
+      }
+      stage('Build') {
+         steps {
+            sh 'mvn clean install'
+         }
+      }
+   }
+}
