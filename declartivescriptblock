@@ -1,0 +1,16 @@
+pipeline {
+  agent any
+  
+  stages {
+    stage('Example') {
+      steps {
+        script {
+          // Groovy code goes here
+          def foo = 'Hello'
+          def bar = 'World'
+          println "${foo} ${bar}!"
+        }
+      }
+    }
+  }
+}

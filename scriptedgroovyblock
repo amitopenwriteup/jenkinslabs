@@ -1,0 +1,21 @@
+node {
+    stage('Example') {
+        // Define some variables
+        def greeting = 'Hello'
+        def name = 'Jenkins'
+
+        // Print a message
+        echo "${greeting}, ${name}!"
+
+        // Checkout code from a Git repository
+        checkout([
+            $class: 'GitSCM',
+            branches: [[name: '*/master']],
+            userRemoteConfigs: [[url: 'https://github.com/myorg/myrepo.git']]
+        ])
+
+        // Run some shell commands
+        sh 'npm install'
+        sh 'npm test'
+    }
+}
