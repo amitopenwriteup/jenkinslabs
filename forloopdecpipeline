@@ -1,0 +1,16 @@
+pipeline {
+  agent any
+  
+  stages {
+    stage('Example') {
+      steps {
+        script {
+          def items = ['apple', 'banana', 'orange']
+          for (item in items) {
+            echo "The current item is ${item}"
+          }
+        }
+      }
+    }
+  }
+}
